@@ -1,0 +1,24 @@
+repositories:
+  - name: argo
+    url: https://argoproj.github.io/argo-helm
+
+  - name: longhorn
+    url: https://charts.longhorn.io
+
+
+apiVersions:
+  - monitoring.coreos.com/v1
+
+releases:
+  - name: argocd
+    namespace: argocd
+    chart: argo/argo-cd
+    values:
+      - argocd-values.yaml
+
+  - name: longhorn
+    namespace: longhorn
+    chart: longhorn/longhorn
+    version: v1.9.1
+    values:
+      - longhorn-values.yaml
