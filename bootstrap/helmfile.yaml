@@ -1,24 +1,36 @@
 repositories:
-  - name: argo
-    url: https://argoproj.github.io/argo-helm
+  - name: grafana
+    url: ghcr.io/grafana/helm-charts
+    oci: true
 
   - name: longhorn
     url: https://charts.longhorn.io
 
+  - name: prometheus
+    url: ghcr.io/prometheus-community/charts
+    oci: true
 
 apiVersions:
   - monitoring.coreos.com/v1
 
 releases:
-  - name: argocd
-    namespace: argocd
-    chart: argo/argo-cd
-    values:
-      - argocd-values.yaml
-
+  # https://longhorn.io/docs
   - name: longhorn
     namespace: longhorn
     chart: longhorn/longhorn
     version: v1.9.1
+
+  # Monitoring
+  # https://grafana.github.io/grafana-operator/docs
+  - name: grafana-operator
+    namespace: monitoring
+    chart: grafana/grafana-operator
+    version: v5.19.0
+
+  # https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus
+  - name: prometheus
+    namespace: monitoring
+    chart: prometheus/prometheus
+    version: 27.36.0
     values:
-      - longhorn-values.yaml
+      - prometheus-values.yaml
