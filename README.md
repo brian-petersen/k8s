@@ -24,6 +24,17 @@ Any yaml files with sensitive information contain
 
     cat cloudflare/tunnel-token.yaml.tpl | op inject | kubectl apply -f -
 
+## Exposing Services
+
+Services are exposed via a cloudflared tunnel.
+Once the service is stood up, some manual configuration
+in cloudflare is necessary.
+
+1. Visit [Cloudflare](https://cloudflare.com) and sign in
+1. Visit Sign in > Zero Trust > Networks > Tunnels > Edit
+1. Add the url to the service:
+   `<service-name>.<namespace-name>.svc.cluster.local:<service-port>`
+
 ## Other Tips
 
 - [Grafana Dashboards](https://grafana.com/grafana/dashboards/) -
