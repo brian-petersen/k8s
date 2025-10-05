@@ -1,0 +1,33 @@
+# Used this to copy data into volumes when migrating hosts
+#
+# 1. Create the volume
+# 2. Spin this up for the one off task
+# 3. Copy the data: cat ~/calibre-web-library.tar.gz | kubectl exec -i data-migrate -- tar xzf - -C /data
+# 4. Verify the data: kubectl exec -i data-migrate -- ls -l /data
+# 5. If necessary, correct permissions: kubectl exec -i data-migrate -- chown -R root:root /data
+#
+# Once done, delete the pod: kubectl delete pod data-migrate
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: data-migrate
+  # namespace: calibre-web
+  # namespace: audiobookshelf
+spec:
+  containers:
+  - name: data-migrate
+    image: busybox
+    command: ["/bin/sh", "-c", "sleep 360000"]
+    volumeMounts:
+    - name: volume
+      mountPath: /data
+  volumes:
+  - name: volume
+    persistentVolumeClaim:
+      # claimName: calibre-web-config
+      # claimName: calibre-web-library
+      # claimName: audiobookshelf-config
+      # claimName: audiobookshelf-metadata
+      # claimName: audiobookshelf-audiobooks-library
+  restartPolicy: Never
