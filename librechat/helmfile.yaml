@@ -1,0 +1,13 @@
+repositories:
+  - name: librechat
+    url: ghcr.io/danny-avila/librechat-chart
+    oci: true
+
+releases:
+  # https://github.com/danny-avila/LibreChat/tree/main/helm/librechat
+  - name: librechat
+    namespace: librechat
+    chart: librechat/librechat
+    version: 1.9.1
+    values:
+      - librechat-values.yaml

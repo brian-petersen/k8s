@@ -1,0 +1,65 @@
+# See https://github.com/danny-avila/LibreChat/blob/main/helm/librechat/values.yaml for all available values
+# For general config, see https://www.librechat.ai/docs/configuration
+
+replicaCount: 1
+
+global:
+  librechat:
+    existingSecretName: librechat-credentials
+
+librechat:
+  configEnv:
+    # ALLOW_REGISTRATION: "true"
+
+    # DEBUG_PLUGINS: "true"
+
+    GOOGLE_KEY: user_provided
+    OPENAI_API_KEY: user_provided
+
+  existingSecretName: librechat-credentials
+
+  configYamlContent: |
+    version: "1"
+
+    mcpServers:
+      context7:
+        command: npx
+        args:
+          - -y
+          - "@upstash/context7-mcp"
+        env:
+          CONTEXT7_API_KEY: ${CONTEXT7_API_KEY}
+
+      fetch:
+        command: uvx
+        args: 
+          - mcp-server-fetch
+
+      sequential-thinking:
+        command: npx
+        args:
+          - -y
+          - "@modelcontextprotocol/server-sequential-thinking"
+
+  imageVolume:
+    enabled: true
+    size: 10G
+
+ingress:
+  enabled: false
+
+mongodb:
+ enabled: true
+ image:
+  repository: bitnamilegacy/mongodb
+ persistence:
+   size: 10Gi
+
+meilisearch:
+  enabled: true
+  persistence:
+    enabled: true
+    size: 15Gi
+  auth:
+    # Use an existing Kubernetes secret for the MEILI_MASTER_KEY
+    existingMasterKeySecret: librechat-credentials
