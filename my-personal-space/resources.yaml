@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-personal-space-db
+  namespace: my-personal-space
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-personal-space
+  namespace: my-personal-space
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: my-personal-space
+  template:
+    metadata:
+      labels:
+        app: my-personal-space
+    spec:
+      containers:
+        - name: my-personal-space
+          image: ghcr.io/brian-petersen/my-personal-space:latest
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - secretRef:
+                name: my-personal-space-secrets
+          volumeMounts:
+            - name: db
+              mountPath: /app/db
+      volumes:
+        - name: db
+          persistentVolumeClaim:
+            claimName: my-personal-space-db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-personal-space
+  namespace: my-personal-space
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 4000
+      targetPort: 4000
+  selector:
+    app: my-personal-space

@@ -12,8 +12,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: data-migrate
-  # namespace: calibre-web
   # namespace: audiobookshelf
+  # namespace: calibre-web
+  # namespace: my-personal-space
 spec:
   containers:
   - name: data-migrate
@@ -25,9 +26,10 @@ spec:
   volumes:
   - name: volume
     persistentVolumeClaim:
-      # claimName: calibre-web-config
-      # claimName: calibre-web-library
+      # claimName: audiobookshelf-audiobooks-library
       # claimName: audiobookshelf-config
       # claimName: audiobookshelf-metadata
-      # claimName: audiobookshelf-audiobooks-library
+      # claimName: calibre-web-config
+      # claimName: calibre-web-library
+      # claimName: my-personal-space-db
   restartPolicy: Never
