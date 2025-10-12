@@ -41,6 +41,8 @@ metadata:
   namespace: audiobookshelf
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: audiobookshelf
@@ -51,7 +53,7 @@ spec:
     spec:
       containers:
         - name: audiobookshelf
-          image: ghcr.io/advplyr/audiobookshelf:2.29.0
+          image: ghcr.io/advplyr/audiobookshelf:2.30.0
           ports:
             - containerPort: 80
           env:
