@@ -1,2 +1,6 @@
+server:
+  persistentVolume:
+    size: 10Gi
+
 alertmanager:
   enabled: false
