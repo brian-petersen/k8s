@@ -1,4 +1,8 @@
 repositories:
+  - name: cert-manager
+    url: quay.io/jetstack/charts
+    oci: true
+
   - name: grafana
     url: ghcr.io/grafana/helm-charts
     oci: true
@@ -14,6 +18,13 @@ apiVersions:
   - monitoring.coreos.com/v1
 
 releases:
+  - name: cert-manager
+    namespace: cert-manager
+    chart: cert-manager/cert-manager
+    version: v1.20.3
+    values:
+      - installCRDs: true
+
   # https://longhorn.io/docs
   - name: longhorn
     namespace: longhorn
