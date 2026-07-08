@@ -2,6 +2,11 @@
 
 yaml files for my homelab k8s instance.
 
+## New Computer
+
+1. Install `helm` and `helmfile`
+1. Install `helm-diff`: https://github.com/databus23/helm-diff#install
+
 ## Helmfile Tips
 
 When setting up a new cluster:
