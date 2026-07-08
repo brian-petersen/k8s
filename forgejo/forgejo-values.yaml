@@ -1,0 +1,10 @@
+persistence:
+  enabled: true
+  size: 10Gi
+
+gitea:
+  config:
+    server:
+      ROOT_URL: https://code.luckywatcher.dev
+    indexer:
+      REPO_INDEXER_ENABLED: true
