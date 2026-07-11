@@ -5,6 +5,29 @@ persistence:
 gitea:
   config:
     server:
-      ROOT_URL: https://code.luckywatcher.dev
+      ROOT_URL: https://code.internal.luckywatcher.dev
+
+    service:
+      DISABLE_REGISTRATION: true
+      REQUIRE_SIGNIN_VIEW: true
+
     indexer:
       REPO_INDEXER_ENABLED: true
+
+    security:
+      INSTALL_LOCK: true
+
+    repository:
+      FORCE_PRIVATE: true
+
+    actions:
+      ENABLED: false
+
+    packages:
+      ENABLED: false
+
+    federation:
+      ENABLED: false 
+
+    openid:
+      ENABLE_OPENID_SIGNIN: false 
