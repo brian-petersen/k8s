@@ -100,7 +100,7 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-    - host: audiobooks-internal.luckywatcher.dev
+    - host: audiobooks.internal.luckywatcher.dev
       http:
         paths:
           - path: /
@@ -113,5 +113,5 @@ spec:
 
   tls:
     - hosts:
-        - audiobooks-internal.luckywatcher.dev
+        - audiobooks.internal.luckywatcher.dev
       secretName: audiobooks-internal-luckywatcher-dev-tls
