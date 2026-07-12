@@ -1,0 +1,29 @@
+authentik:
+  error_reporting:
+    enabled: false
+
+  existingSecret:
+    secretName: authentik-credentials
+
+global:
+  env:
+    - name: AUTHENTIK_POSTGRESQL__HOST
+      value: authentik-cluster-rw
+    - name: AUTHENTIK_POSTGRESQL__NAME
+      value: authentik
+    - name: AUTHENTIK_POSTGRESQL__USER
+      value: authentik
+    - name: AUTHENTIK_POSTGRESQL__PORT
+      value: "5432"
+    - name: AUTHENTIK_POSTGRESQL__PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: authentik-cluster-app
+          key: password
+
+server:
+  ingress:
+    enabled: false
+
+postgresql:
+  enabled: false
