@@ -45,7 +45,7 @@ releases:
   - name: grafana-operator
     namespace: monitoring
     chart: grafana/grafana-operator
-    version: 5.24.0
+    version: 5.25.0
 
   # https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus
   - name: prometheus
